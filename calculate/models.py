@@ -1,10 +1,12 @@
 from django.db import models
 
 
+# вот сюда вроде по задумке записывается день пятый, ссылка на него и т.д
 class Trainings(models.Model):
     h1 = models.CharField(max_length=40)
     slug = models.SlugField()
     description = models.CharField(max_length=50)
+    image = models.ImageField(null=True, blank=True)
 
 class Train(models.Model):
     training = models.ForeignKey(Trainings, on_delete=models.CASCADE)
@@ -19,6 +21,7 @@ class Train(models.Model):
 class Exercise(models.Model):
     name = models.CharField(max_length=50)
     video = models.URLField(max_length=30, verbose_name='url для видео')
+    image = models.ImageField(null=True, blank=True)
     content = models.CharField(max_length=255)
 
 
@@ -47,3 +50,11 @@ class Tracker(models.Model):
                                verbose_name='Ужин', related_name='dinner')
     snack = models.ForeignKey(Dishes, on_delete=models.SET_NULL, null=True, blank=True,
                               verbose_name='перекус', related_name='snack')
+
+
+class Scrub(models.Model):
+    name = models.CharField(max_length=100)
+    compound = models.CharField(max_length=255)
+    image = models.ImageField(null=True, blank=True)
+    technik = models.TextField()
+
