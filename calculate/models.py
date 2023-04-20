@@ -15,3 +15,18 @@ class Train(models.Model):
     # дальше, h2 разминка, description = стройность пантеры, content сама тренировка.
     # ниже практические советы и реки они тоже записывааются в train и через fk связывааются с треней, в общем сколько
     # нужно, столько на одной странице и можно добавить
+
+class Exercise(models.Model):
+    name = models.CharField(max_length=50)
+    video = models.URLField(max_length=30, verbose_name='url для видео')
+    content = models.CharField(max_length=255)
+
+
+'здесь советы к упражнению, их может быть несколько и их всегда разное кол-во решил вынести в отдельную таблицу'
+class Advices(models.Model):
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    content = models.CharField(max_length=255)
+
+class Muscules(models.Model):
+    name = models.CharField(max_length=40)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
