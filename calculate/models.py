@@ -30,3 +30,20 @@ class Advices(models.Model):
 class Muscules(models.Model):
     name = models.CharField(max_length=40)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+
+
+class Dishes(models.Model):
+    name = models.CharField(max_length=50)
+    calories = models.IntegerField()
+
+# счетчик калорий, каждый день 4 блюда, обед завтрак перекус и ужин
+class Tracker(models.Model):
+    date = models.DateField(auto_created=True)
+    breakfast = models.ForeignKey(Dishes, on_delete=models.SET_NULL, null=True, blank=True,
+                                  verbose_name='завтрак', related_name='breakfast')
+    launch = models.ForeignKey(Dishes, on_delete=models.SET_NULL, null=True, blank=True,
+                               verbose_name='обед', related_name='launch')
+    dinner = models.ForeignKey(Dishes, on_delete=models.SET_NULL, null=True, blank=True,
+                               verbose_name='Ужин', related_name='dinner')
+    snack = models.ForeignKey(Dishes, on_delete=models.SET_NULL, null=True, blank=True,
+                              verbose_name='перекус', related_name='snack')
