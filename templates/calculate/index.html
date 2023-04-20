@@ -41,6 +41,10 @@
 
 
 <script>
+    const result = document.getElementById('result')
+    if (localStorage.getItem('result')) {
+        result.innerHTML = localStorage.getItem('result')
+    }
     function calculate() {
         var radios = document.getElementsByName('genderS');
 
@@ -59,10 +63,10 @@
         {#дальше вот здесь должна быть формула рассчета, ну я например все перемножу, а пол переведу в некоторый коэффициент#}
         if (gender==="male") {gender=1} else {gender=0.8}
         let callorag = String(age*weight*height*goal*activity*gender)
-        console.log(typeof age, typeof weight, typeof goal, typeof activity, typeof gender)
-        let result = document.getElementById('result')
+
         result.innerHTML = callorag
         {#console.log('gend', gender)#}
+        localStorage.setItem('result', callorag)
     }
 
 </script>
