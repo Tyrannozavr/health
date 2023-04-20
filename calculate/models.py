@@ -20,7 +20,7 @@ class Train(models.Model):
 
 class Exercise(models.Model):
     name = models.CharField(max_length=50)
-    video = models.URLField(max_length=30, verbose_name='url для видео')
+    video = models.URLField(max_length=30, verbose_name='url для видео', null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     content = models.CharField(max_length=255)
 
@@ -32,7 +32,7 @@ class Advices(models.Model):
 
 class Muscules(models.Model):
     name = models.CharField(max_length=40)
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    exercise = models.ManyToManyField(Exercise)
 
 
 class Dishes(models.Model):
